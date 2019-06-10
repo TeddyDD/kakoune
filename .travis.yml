@@ -1,50 +1,48 @@
 matrix:
   include:
-    - dist: xenial
-      addons:
-        snaps:
-          - name: snapcraft
-            confinement: classic
-      script: snapcraft
+    - sudo: required
+      services: [docker]
+      script:
+        - docker run -v $(pwd):$(pwd) -w $(pwd) snapcore/snapcraft sh -c "apt update && snapcraft"      
 
-    - language: cpp
+    # - language: cpp
 
-      sudo: false
+    #   sudo: false
 
-      os:
-        - linux
-        - osx
+    #   os:
+    #     - linux
+    #     - osx
 
-      osx_image: xcode10.1
+    #   osx_image: xcode10.1
 
-      compiler:
-        - clang
-        - gcc
+    #   compiler:
+    #     - clang
+    #     - gcc
 
-      # env:
-      #   global:
-      #    - secure: "R+NxqtytOslIcQ/eCbLoZhImsgYdJnljfjANdieFQGune9ACPPQL0YanXkF49c9SWGBSxrAcute0egQzv2CU2+ivSQIX/xnMebKHiOmSPYBoxX+VgxLT3U1itUYlpYwixo9rF8UnGdlgXid6oENSiCvfWtNKoM2qOL0Ttw31J9E="
+    #    env:
+    #      global:
+    #       - secure: "R+NxqtytOslIcQ/eCbLoZhImsgYdJnljfjANdieFQGune9ACPPQL0YanXkF49c9SWGBSxrAcute0egQzv2CU2+ivSQIX/xnMebKHiOmSPYBoxX+VgxLT3U1itUYlpYwixo9rF8UnGdlgXid6oENSiCvfWtNKoM2qOL0Ttw31J9E="
 
-      before_install: if [ "$CXX" = "g++" ]; then export CXX=g++-7; fi
+    #   before_install: if [ "$CXX" = "g++" ]; then export CXX=g++-7; fi
 
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - libstdc++-7-dev
-            - g++-7
-            - libncursesw5-dev
-        homebrew:
-          update: true
-          packages: gcc@7
-        # coverity_scan:
-        #   project:
-        #     name: "mawww/kakoune"
-        #     description: "Build submitted via Travis CI"
-        #   notification_email: frrrwww@gmail.com
-        #   build_command_prepend: "cd src && make clean"
-        #   build_command: "make -j4"
-        #   branch_pattern: coverity-scan
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - libstdc++-7-dev
+    #         - g++-7
+    #         - libncursesw5-dev
+    #     homebrew:
+    #       update: true
+    #       packages: gcc@7
+    #      coverity_scan:
+    #        project:
+    #          name: "mawww/kakoune"
+    #          description: "Build submitted via Travis CI"
+    #        notification_email: frrrwww@gmail.com
+    #        build_command_prepend: "cd src && make clean"
+    #        build_command: "make -j4"
+    #        branch_pattern: coverity-scan
 
-      script: cd src && make && make test
+    #   script: cd src && make && make test
