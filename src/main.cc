@@ -46,6 +46,7 @@ struct {
 } constexpr version_notes[] = { {
         20230805,
         "» Fix FreeBSD/MacOS clang compilation\n"
+        "» History is now stored linearly instead of in a tree\n"
     }, {
         20230729,
         "» {+b}<a-u>{} and {+b}<a-U>{} now undo/redo selection changes; "
